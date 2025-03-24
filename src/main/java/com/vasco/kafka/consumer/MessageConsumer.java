@@ -36,6 +36,7 @@ public class MessageConsumer {
         String item = "Start Process after receive message from Atlas Kafka";
 
         instance.setVariable("itemName", item);
+        instance.businessKey("testBusinessKey");
 
         instance.execute();
 
