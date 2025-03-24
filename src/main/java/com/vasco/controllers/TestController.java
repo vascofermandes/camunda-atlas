@@ -1,13 +1,13 @@
 package com.vasco.controllers;
 
-import com.vasco.kafka.producer.MessageProducer;
+import com.vasco.exception.MalformedObjectException;
 import com.vasco.model.KafkaMessageModel;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-import org.camunda.bpm.engine.runtime.ProcessInstantiationBuilder;
+import com.vasco.service.imp.AtlasCommunicationServiceImp;
+import com.vasco.util.KafkaMessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,71 +16,48 @@ public class TestController {
 
 
     @Autowired
-    private MessageProducer messageProducer;
+    private AtlasCommunicationServiceImp atlasComunicationService;
 
-    @GetMapping(value = "test")
-    public String test(){
-        return "Test Camunda Controller";
+
+    @PostMapping(value = "/atlas/sendKafkaMessage")
+    public void sendKafkaMessage(@RequestBody KafkaMessageModel kafkaMessage){
+
+
+        if(KafkaMessageValidator.isValidMessage(kafkaMessage)){
+            atlasComunicationService.send(kafkaMessage);
+            return;
+        }
+        throw(new MalformedObjectException("Malformed kafkaMessage"));
+
+
     }
 
-    @GetMapping(value = "/execute")
-    public String execute(){
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        ProcessInstantiationBuilder instance = engine.getRuntimeService().createProcessInstanceByKey("Process_1dv384a");
+    @GetMapping(value = "/atlas/sendTestKafkaMessage")
+    public void sendTestKafkaMessage(){
 
-        String item = "Test item from Controller";
+        KafkaMessageModel kafkaMessage = new KafkaMessageModel();
+        kafkaMessage.setEnvironmentId(123);
+        kafkaMessage.setTenantName("testCamundaTenantName");
+        kafkaMessage.setProcessId("testCamundaProcessId");
+        kafkaMessage.setProcessName("testCamundaProcessName");
+        kafkaMessage.setVersionName("testCamundaVersionName");
+        kafkaMessage.setType("testCamundaType");
+        kafkaMessage.setCaseId("testCamundaCaseId");
+        kafkaMessage.setGroupName("testCamundaGroupName");
+        kafkaMessage.setUserName("testCamundaUserName");
+        kafkaMessage.setTaskName("testCamundaTaskName");
+        kafkaMessage.setIsStartProcess(false);;
 
-        instance.setVariable("itemName", item);
 
-        instance.businessKey("testBusinessKey");
+        if(KafkaMessageValidator.isValidMessage(kafkaMessage)){
+            atlasComunicationService.send(kafkaMessage);
+            return;
+        }
+        throw(new MalformedObjectException("Malformed kafkaMessage"));
 
-        instance.executeWithVariablesInReturn();
 
-        return "BPMN Executed";
     }
 
 
-    @GetMapping(value = "/testKafka")
-    public String testKafka(){
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        ProcessInstantiationBuilder instance = engine.getRuntimeService().createProcessInstanceByKey("Process_1dv384a");
-
-        String item = "Test item from Kafka endpoint";
-
-        instance.setVariable("itemName", item);
-
-        instance.execute();
-
-        KafkaMessageModel message = new KafkaMessageModel(123, "testControllerv1.0", 1, 1);
-
-        messageProducer.sendMessage("test-print-topic", message);
-
-        JsonSerializer<KafkaMessageModel> serializer = new JsonSerializer<>();
-
-
-        System.out.println("messageKafkaSerialized " + serializer.serialize("test-print-topic", message));
-
-        return "BPMN Kafka Executed";
-    }
-
-    @GetMapping(value = "/testHttpConnectorGet")
-    public String testHttpConnectorGet(){
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        ProcessInstantiationBuilder instance = engine.getRuntimeService().createProcessInstanceByKey("Process_1dv384av2");
-
-        instance.execute();
-
-        return "BPMN Http Connector GET Executed";
-    }
-
-    @GetMapping(value = "/testHttpConnectorPost")
-    public String testHttpConnectorPost(){
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        ProcessInstantiationBuilder instance = engine.getRuntimeService().createProcessInstanceByKey("Process_1dv384av3");
-
-        instance.execute();
-
-        return "BPMN Http Connector POST Executed";
-    }
 
 }

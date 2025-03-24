@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.vasco</groupId>
-  <artifactId>camunda-test</artifactId>
+  <artifactId>csmunda-atlas</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
