@@ -1,6 +1,6 @@
 package com.vasco.kafka.producer;
 
-import com.vasco.model.KafkaMessageModel;
+import com.vasco.model.ProcessMonitorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 public class MessageProducer {
 
     @Autowired
-    private KafkaTemplate<String, KafkaMessageModel> kafkaTemplate;
+    private KafkaTemplate<String, ProcessMonitorMessage> kafkaTemplate;
 
-    public void sendMessage(String topic, KafkaMessageModel message) {
+    public void sendMessage(String topic, ProcessMonitorMessage message) {
         kafkaTemplate.send(topic, message);
     }
 

@@ -1,6 +1,6 @@
 package com.vasco.kafka.consumer;
 
-import com.vasco.model.KafkaMessageModel;
+import com.vasco.model.ProcessMonitorMessage;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.runtime.ProcessInstantiationBuilder;
@@ -14,7 +14,7 @@ public class MessageConsumer {
     private final Logger logger = Logger.getLogger(MessageConsumer.class.getName());
 
     @KafkaListener(topics = "testTopic", groupId = "kafka_test_consumer")
-    public void listen(KafkaMessageModel message) {
+    public void listen(ProcessMonitorMessage message) {
         logger.info("Received message from Atlas: " + message.toString());
         System.out.println("EnvironmentId " + message.getEnvironmentId());
         System.out.println("tenantName " + message.getTenantName());
@@ -26,7 +26,7 @@ public class MessageConsumer {
         System.out.println("groupName " + message.getGroupName());
         System.out.println("userName " + message.getUserName());
         System.out.println("taskName " + message.getTaskName());
-        System.out.println("isStartProcess " + message.getIsStartProcess());
+        System.out.println("isStartProcess " + message.isStartProcess());
 
         //TODO: VERIFY with MessageVALIDATOR and implement a service to start the process
 

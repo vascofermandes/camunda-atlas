@@ -1,6 +1,6 @@
 package com.vasco.kafka.producer;
 
-import com.vasco.model.KafkaMessageModel;
+import com.vasco.model.ProcessMonitorMessage;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
     @Bean
-    public ProducerFactory<String, KafkaMessageModel> producerFactory() {
+    public ProducerFactory<String, ProcessMonitorMessage> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "atlas-eu-event.linkconsulting.com:9092");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -23,7 +23,7 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(configProps);
     }
     @Bean
-    public KafkaTemplate<String, KafkaMessageModel> kafkaTemplate() {
+    public KafkaTemplate<String, ProcessMonitorMessage> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

@@ -1,6 +1,6 @@
 package com.vasco.kafka.consumer;
 
-import com.vasco.model.KafkaMessageModel;
+import com.vasco.model.ProcessMonitorMessage;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +17,8 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     @Bean
-    public ConsumerFactory<String, KafkaMessageModel> consumerFactory() {
-        JsonDeserializer<KafkaMessageModel> deserializer = new JsonDeserializer<>(KafkaMessageModel.class);
+    public ConsumerFactory<String, ProcessMonitorMessage> consumerFactory() {
+        JsonDeserializer<ProcessMonitorMessage> deserializer = new JsonDeserializer<>(ProcessMonitorMessage.class);
         deserializer.addTrustedPackages("*");
 
         Map<String, Object> configProps = new HashMap<>();
@@ -30,8 +30,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, KafkaMessageModel> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, KafkaMessageModel> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, ProcessMonitorMessage> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, ProcessMonitorMessage> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
