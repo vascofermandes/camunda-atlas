@@ -5,10 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DataObject {
+public class CamundaDataObject {
    String id;
    String name;
    String type;
    String url;
-   Metadata metadata;
+   String metadataUploadedBy;
+   String metadataUploadTime;
+   String metadataSize;
 }

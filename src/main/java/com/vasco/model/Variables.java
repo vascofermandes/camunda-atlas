@@ -1,8 +1,13 @@
 package com.vasco.model;
 
-public class Variable {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Variables {
     String invoiceNumber;
-    String amount;
+    Double amount;
     String currency;
     String customerId;
     String approvalStatus;

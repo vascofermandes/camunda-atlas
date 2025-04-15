@@ -17,11 +17,10 @@ public class ProcessMonitorServiceImp implements ProcessMonitorService {
     private MessageProducer messageProducer;
 
     @Override
-    public void send(ProcessMonitorMessage kafkaMessage) {
+    public void send(String topic, ProcessMonitorMessage kafkaMessage) {
 
-            messageProducer.sendMessage("testTopic", kafkaMessage);
-
-            logger.info("Message sent to Atlas Kafka" + kafkaMessage );
+            messageProducer.sendMonitorMessage(topic, kafkaMessage);
+            logger.info("Message sent to Atlas topic: " + topic + " /n message: " + kafkaMessage );
 
     }
 

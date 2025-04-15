@@ -4,6 +4,6 @@ import com.vasco.model.ProcessMonitorMessage;
 
 public interface ProcessMonitorService {
 
-    void send(ProcessMonitorMessage kafkaMessage);
+    void send(String topic, ProcessMonitorMessage kafkaMessage);
 
 }

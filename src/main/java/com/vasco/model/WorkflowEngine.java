@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
-public class Metadata {
-    String uploadedBy;
-    String uploadTime;
-    String size;
+public class WorkflowEngine {
+    String endpoint;
+    Authentication authentication;
 }
