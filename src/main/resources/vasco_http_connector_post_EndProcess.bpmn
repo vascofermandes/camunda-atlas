@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0mhburf" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.26.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <bpmn:process id="Process_post_end_process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_07rhmft</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_0i60qcn" name="HTTP Connector POST_end_process">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://localhost:8080/handover/testNotifyEndProcess</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">{
+"processId": 101,
+"processName": "Invoice Processing",
+"versionName": "31-10-2025",
+"caseId": "CASE-20250226-XYZ123",
+"nextWorkflowEngine": {
+"endpoint": "https://sap.example.com/workflow/start",
+"authentication": {
+"type": "OAuth2",
+"token": "eyJhbGciOiJIUzI1NiIsIn..."
+}
+},
+"variables": {
+"invoiceNumber": "INV-20250226-001",
+"amount": 1500.75,
+"currency": "USD",
+"customerId": "CUST-1001",
+"approvalStatus": "APPROVED"
+},
+"dataObjects": [
+{
+"id": "doc-001",
+"name": "Invoice Document",
+"type": "PDF",
+"url": "https://example.com/documents/invoice-001.pdf",
+"metadata": {
+"uploadedBy": "john.doe",
+"uploadTime": "2025-02-26T10:15:00Z",
+"size": "2MB"
+}
+},
+{
+"id": "doc-002",
+"name": "Approval Memo",
+"type": "PDF",
+"url": "https://example.com/documents/approval-memo-001.pdf",
+"metadata": {
+"uploadedBy": "jane.smith",
+"uploadTime": "2025-02-26T12:00:00Z",
+"size": "1MB" 
+}
+}
+]
+}</camunda:inputParameter>
+            <camunda:inputParameter name="accept">application/json</camunda:inputParameter>
+            <camunda:inputParameter name="Content-Type">application/json</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="responsePost">
+              <camunda:script scriptFormat="JavaScript">print('responsePOST :: ' + response);
+response;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_07rhmft</bpmn:incoming>
+      <bpmn:outgoing>Flow_0anj75r</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_07rhmft" sourceRef="StartEvent_1" targetRef="Activity_0i60qcn" />
+    <bpmn:sequenceFlow id="Flow_0anj75r" sourceRef="Activity_0i60qcn" targetRef="Event_0bddd5f" />
+    <bpmn:endEvent id="Event_0bddd5f" name="end_http_connector_post">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_18bfd23" />
+        </camunda:inputOutput>
+        <camunda:properties>
+          <camunda:property />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0anj75r</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_post_end_process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ghd166_di" bpmnElement="Event_0bddd5f">
+        <dc:Bounds x="582" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="558" y="142" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09zh8dz_di" bpmnElement="Activity_0i60qcn">
+        <dc:Bounds x="350" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_07rhmft_di" bpmnElement="Flow_07rhmft">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="350" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0anj75r_di" bpmnElement="Flow_0anj75r">
+        <di:waypoint x="450" y="117" />
+        <di:waypoint x="582" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
