@@ -54,11 +54,10 @@
 }
 ]
 }</camunda:inputParameter>
-            <camunda:inputParameter name="accept">application/json</camunda:inputParameter>
-            <camunda:inputParameter name="Content-Type">application/json</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="accept">application/json</camunda:entry>
               </camunda:map>
             </camunda:inputParameter>
             <camunda:outputParameter name="responsePost">
