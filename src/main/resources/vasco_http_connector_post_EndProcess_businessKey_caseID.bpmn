@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0mhburf" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.26.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
-  <bpmn:process id="Process_post_end_process" isExecutable="true" camunda:historyTimeToLive="100000000">
+  <bpmn:process id="Process_post_end_process_caseId" isExecutable="true" camunda:historyTimeToLive="100000000">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_07rhmft</bpmn:outgoing>
     </bpmn:startEvent>
@@ -10,55 +10,50 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="url">http://localhost:8080/handover/testNotifyEndProcess</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="payload">
-  <![CDATA[
-  {
-    "processId": 101,
-    "processName": "Invoice Processing",
-    "versionName": "31-10-2025",
-    "caseId": "${execution.businessKey}",
-    "nextWorkflowEngine": {
-      "endpoint": "https://sap.example.com/workflow/start",
-      "authentication": {
-        "type": "OAuth2",
-        "token": "eyJhbGciOiJIUzI1NiIsIn..."
-      }
-    },
-    "variables": {
-      "invoiceNumber": "INV-20250226-001",
-      "amount": 1500.75,
-      "currency": "USD",
-      "customerId": "CUST-1001",
-      "approvalStatus": "APPROVED"
-    },
-    "dataObjects": [
-      {
-        "id": "doc-001",
-        "name": "Invoice Document",
-        "type": "PDF",
-        "url": "https://example.com/documents/invoice-001.pdf",
-        "metadata": {
-          "uploadedBy": "john.doe",
-          "uploadTime": "2025-02-26T10:15:00Z",
-          "size": "2MB"
-        }
-      },
-      {
-        "id": "doc-002",
-        "name": "Approval Memo",
-        "type": "PDF",
-        "url": "https://example.com/documents/approval-memo-001.pdf",
-        "metadata": {
-          "uploadedBy": "jane.smith",
-          "uploadTime": "2025-02-26T12:00:00Z",
-          "size": "1MB"
-        }
-      }
-    ]
-  }
-  ]]>
-</camunda:inputParameter>
-
+            <camunda:inputParameter name="payload">{
+"processId": 101,
+"processName": "Invoice Processing",
+"versionName": "31-10-2025",
+"caseId": "CASE-20250226-XYZ123",
+"nextWorkflowEngine": {
+"endpoint": "https://sap.example.com/workflow/start",
+"authentication": {
+"type": "OAuth2",
+"token": "eyJhbGciOiJIUzI1NiIsIn..."
+}
+},
+"variables": {
+"invoiceNumber": "INV-20250226-001",
+"amount": 1500.75,
+"currency": "USD",
+"customerId": "CUST-1001",
+"approvalStatus": "APPROVED"
+},
+"dataObjects": [
+{
+"id": "doc-001",
+"name": "Invoice Document",
+"type": "PDF",
+"url": "https://example.com/documents/invoice-001.pdf",
+"metadata": {
+"uploadedBy": "john.doe",
+"uploadTime": "2025-02-26T10:15:00Z",
+"size": "2MB"
+}
+},
+{
+"id": "doc-002",
+"name": "Approval Memo",
+"type": "PDF",
+"url": "https://example.com/documents/approval-memo-001.pdf",
+"metadata": {
+"uploadedBy": "jane.smith",
+"uploadTime": "2025-02-26T12:00:00Z",
+"size": "1MB" 
+}
+}
+]
+}</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
@@ -91,7 +86,7 @@ response;</camunda:script>
     </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_post_end_process">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_post_end_process_caseId">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>

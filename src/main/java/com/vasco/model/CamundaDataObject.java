@@ -3,9 +3,13 @@ package com.vasco.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class CamundaDataObject {
+public class CamundaDataObject implements Serializable {
+   private static final long serialVersionUID = 1L;
+
    String id;
    String name;
    String type;

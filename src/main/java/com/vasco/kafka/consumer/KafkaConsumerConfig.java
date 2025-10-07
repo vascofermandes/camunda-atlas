@@ -23,7 +23,7 @@ public class KafkaConsumerConfig {
         deserializer.addTrustedPackages("*");
 
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "atlas-eu-event.linkconsulting.com:9092");
+        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "kafka_test_consumer");
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
@@ -43,7 +43,7 @@ public class KafkaConsumerConfig {
             deserializer.addTrustedPackages("*");
 
             Map<String, Object> configProps = new HashMap<>();
-            configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "atlas-eu-event.linkconsulting.com:9092");
+            configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
             configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "kafka_test_consumer");
             configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
             configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);

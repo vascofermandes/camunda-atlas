@@ -1,5 +1,5 @@
-#spring.kafka.bootstrap-servers: localhost:9092
-spring.kafka.bootstrap-servers: atlas-eu-event.linkconsulting.com:9092
+spring.kafka.bootstrap-servers: localhost:9092
+#spring.kafka.bootstrap-servers: atlas-eu-event.linkconsulting.com:9092
 spring.kafka.consumer.group-id: kafka_test_consumer
 spring.datasource.url: jdbc:h2:file:./camunda-h2-database
 

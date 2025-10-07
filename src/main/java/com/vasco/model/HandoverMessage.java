@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class HandoverMessage {
 
-   int processId;
+   String processId;
    String processName;
    String versionName;
    String caseId;
