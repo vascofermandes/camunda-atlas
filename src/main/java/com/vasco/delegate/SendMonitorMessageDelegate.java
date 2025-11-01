@@ -20,16 +20,16 @@ public class SendMonitorMessageDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         ProcessMonitorMessage processMonitorMessage = new ProcessMonitorMessage();
 
-        processMonitorMessage.setCaseId(execution.getProcessBusinessKey() != null ? execution.getProcessBusinessKey() : "defaultCaseId");
+        processMonitorMessage.setCaseId(Integer.parseInt(execution.getProcessBusinessKey() != null ? execution.getProcessBusinessKey() : "defaultCaseId"));
 
-        processMonitorMessage.setEnvironmentId(DelegateSafeGets.getSafeIntegerVariable(execution, "environmentId", 41554));
-        processMonitorMessage.setTenantName(DelegateSafeGets.getSafeStringVariable(execution, "tenantName", "defaultTenantName"));
-        processMonitorMessage.setProcessId(DelegateSafeGets.getSafeStringVariable(execution, "processId", "defaultProcessId"));
+        processMonitorMessage.setEnvironmentId(DelegateSafeGets.getSafeIntegerVariable(execution, "environmentId", 1));
+        processMonitorMessage.setEnvironmentName(DelegateSafeGets.getSafeStringVariable(execution, "tenantName", "masterTenant"));
+        processMonitorMessage.setProcessId(DelegateSafeGets.getSafeIntegerVariable(execution, "processId", 10214));
         processMonitorMessage.setProcessName(DelegateSafeGets.getSafeStringVariable(execution, "processName", "defaultProcessName"));
-        processMonitorMessage.setVersionName(DelegateSafeGets.getSafeStringVariable(execution, "versionName", "defaultVersionName"));
+        processMonitorMessage.setVersionId(DelegateSafeGets.getSafeStringVariable(execution, "versionName", "defaultVersionName"));
         processMonitorMessage.setType(DelegateSafeGets.getSafeStringVariable(execution, "type", "defaultType"));
-        processMonitorMessage.setGroupName(DelegateSafeGets.getSafeStringVariable(execution, "groupName", "defaultGroupName"));
-        processMonitorMessage.setUserName(DelegateSafeGets.getSafeStringVariable(execution, "userName", "defaultUserName"));
+        processMonitorMessage.setGroupId(DelegateSafeGets.getSafeStringVariable(execution, "groupName", "defaultGroupName"));
+        processMonitorMessage.setUserId(DelegateSafeGets.getSafeIntegerVariable(execution, "userName", 4));
         processMonitorMessage.setTaskName(DelegateSafeGets.getSafeStringVariable(execution, "taskName", "defaultTaskName"));
         processMonitorMessage.setStartProcess(DelegateSafeGets.getSafeBooleanVariable(execution, "isStartProcess", false));
 
@@ -38,13 +38,13 @@ public class SendMonitorMessageDelegate implements JavaDelegate {
         System.out.println("🛠 ProcessMonitorMessage content:");
         System.out.println("Case ID: " + processMonitorMessage.getCaseId());
         System.out.println("Environment ID: " + processMonitorMessage.getEnvironmentId());
-        System.out.println("Tenant Name: " + processMonitorMessage.getTenantName());
+        System.out.println("Environment Name: " + processMonitorMessage.getEnvironmentName());
         System.out.println("Process ID: " + processMonitorMessage.getProcessId());
         System.out.println("Process Name: " + processMonitorMessage.getProcessName());
-        System.out.println("Version Name: " + processMonitorMessage.getVersionName());
+        System.out.println("Version ID: " + processMonitorMessage.getVersionId());
         System.out.println("Type: " + processMonitorMessage.getType());
-        System.out.println("Group Name: " + processMonitorMessage.getGroupName());
-        System.out.println("User Name: " + processMonitorMessage.getUserName());
+        System.out.println("Group ID: " + processMonitorMessage.getGroupId());
+        System.out.println("User ID: " + processMonitorMessage.getUserId());
         System.out.println("Task Name: " + processMonitorMessage.getTaskName());
         System.out.println("Is Start Process: " + processMonitorMessage.isStartProcess());
         System.out.println("TOPIC: " + topic);

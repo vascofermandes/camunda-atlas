@@ -25,14 +25,14 @@ public class MonitorController {
         System.out.println("PRINT CONTROLLER RECEIVED REQUEST BODY " );
         System.out.println("Topic " + topic);
         System.out.println("EnvironmentId " + processMonitorMessage.getEnvironmentId());
-        System.out.println("tenantName " + processMonitorMessage.getTenantName());
+        System.out.println("EnvironmentName " + processMonitorMessage.getEnvironmentName());
         System.out.println("processId " + processMonitorMessage.getProcessId());
         System.out.println("processName " + processMonitorMessage.getProcessName());
-        System.out.println("versionName " + processMonitorMessage.getVersionName());
+        System.out.println("versionId " + processMonitorMessage.getVersionId());
         System.out.println("type " + processMonitorMessage.getType());
         System.out.println("caseId " + processMonitorMessage.getCaseId());
-        System.out.println("groupName " + processMonitorMessage.getGroupName());
-        System.out.println("userName " + processMonitorMessage.getUserName());
+        System.out.println("groupId " + processMonitorMessage.getGroupId());
+        System.out.println("userId " + processMonitorMessage.getUserId());
         System.out.println("taskName " + processMonitorMessage.getTaskName());
         System.out.println("isStartProcess " + processMonitorMessage.isStartProcess());
 
@@ -49,15 +49,15 @@ public class MonitorController {
     public void sendTestprocessMonitorMessage(){
 
         ProcessMonitorMessage processMonitorMessage = new ProcessMonitorMessage();
-        processMonitorMessage.setEnvironmentId(123);
-        processMonitorMessage.setTenantName("testCamundaTenantName");
-        processMonitorMessage.setProcessId("testCamundaProcessId");
+        processMonitorMessage.setEnvironmentId(1);
+        processMonitorMessage.setEnvironmentName("testCamundaTenantName");
+        processMonitorMessage.setProcessId(1234);
         processMonitorMessage.setProcessName("testCamundaProcessName");
-        processMonitorMessage.setVersionName("testCamundaVersionName");
+        processMonitorMessage.setVersionId("testCamundaVersionName");
         processMonitorMessage.setType("testCamundaType");
-        processMonitorMessage.setCaseId("testCamundaCaseId");
-        processMonitorMessage.setGroupName("testCamundaGroupName");
-        processMonitorMessage.setUserName("testCamundaUserName");
+        processMonitorMessage.setCaseId(3124);
+        processMonitorMessage.setGroupId("adminGroupId");
+        processMonitorMessage.setUserId(34);
         processMonitorMessage.setTaskName("testCamundaTaskName");
         processMonitorMessage.setStartProcess(false);;
 

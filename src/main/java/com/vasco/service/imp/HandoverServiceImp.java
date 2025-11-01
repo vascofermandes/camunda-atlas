@@ -93,7 +93,7 @@ public class HandoverServiceImp implements HandoverService {
 
     @Override
     public void notifyEndProcess(String topic, String processKey, HandoverMessage handoverMessage) {
-
+        handoverMessage.setProcessId(processKey);
         messageProducer.sendEndProcessMessage(topic, handoverMessage);
         logger.info("Message End Process " + processKey + "sent to Atlas topic " + topic + " /n message: " + handoverMessage.toString() );
 

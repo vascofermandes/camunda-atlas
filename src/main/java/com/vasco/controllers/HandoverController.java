@@ -34,19 +34,6 @@ public class HandoverController {
 
     }
 
-    @PostMapping(value = "/testStartProcess")
-    public ResponseEntity testStartProcessHandover(@RequestBody HandoverMessage handoverMessage) {
-
-        System.out.println("HANDOVER *TEST START PROCESS : " + "Process_1dv384a" );
-
-        if(HandoverMessageValidator.isValidMessage(handoverMessage)){
-            handoverService.startProcess("Process_1dv384a", handoverMessage);
-            return ResponseEntity.ok("Process " + "Process_1dv384a" + " started with success");
-        }
-        else {
-            throw(new MalformedObjectException("Malformed processMonitorMessage"));
-        }
-    }
 
     @PostMapping(value = "/{processKey}/notifyEndProcess")
     public ResponseEntity<String> notifyEndProcess(@PathVariable("processKey") String processKey,

@@ -7,14 +7,14 @@ import lombok.Setter;
 public class ProcessMonitorMessage {
 
     private int environmentId;
-    private String tenantName;
-    private String processId;
+    private String environmentName;
+    private int processId;
     private String processName;
-    private String versionName;
+    private String versionId;
     private String type;
-    private String caseId;
-    private String groupName;
-    private String userName;
+    private int caseId;
+    private String groupId;
+    private int userId;
     private String taskName;
     private boolean isStartProcess;
 

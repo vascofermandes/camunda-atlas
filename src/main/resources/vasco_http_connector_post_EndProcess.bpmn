@@ -8,12 +8,12 @@
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="url">http://localhost:8080/handover/testNotifyEndProcess</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://localhost:8080/handover/${execution.processEngineServices.repositoryService.getProcessDefinition(execution.processDefinitionId).key}/notifyEndProcess
+</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="payload">
-  <![CDATA[
   {
-    "processId": 101,
+  "processId": "${execution.processEngineServices.repositoryService.getProcessDefinition(execution.processDefinitionId).key}",
     "processName": "Invoice Processing",
     "versionName": "31-10-2025",
     "caseId": "${execution.businessKey}",
@@ -56,9 +56,7 @@
       }
     ]
   }
-  ]]>
-</camunda:inputParameter>
-
+  </camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>

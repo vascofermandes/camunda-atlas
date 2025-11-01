@@ -18,8 +18,8 @@ public class MessageProducer {
     @Autowired
     private KafkaTemplate<String, HandoverMessage> kafkaTemplateHandover;
 
-    public CompletableFuture<SendResult<String, ProcessMonitorMessage>> sendMonitorMessage(String topic, ProcessMonitorMessage message) {
-        return kafkaTemplateMonitor.send(topic, message);
+    public CompletableFuture<SendResult<String, ProcessMonitorMessage>> sendMonitorMessage(String topic, ProcessMonitorMessage monitorMessage) {
+        return kafkaTemplateMonitor.send(topic, monitorMessage);
     }
 
     public CompletableFuture<SendResult<String, HandoverMessage>> sendEndProcessMessage(String topic, HandoverMessage endProcessMessage) {

@@ -12,14 +12,14 @@
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="payload">{
 "environmentId": 41554,
-"tenantName": "testeTN", "processId": "testePI",
-"processName": "testePN",
-"versionName": "testeVN",
-"type": "testeT",
-"caseId": "testeCI",
-"groupName": "testeGN",
-"userName": "testeUN",
-"taskName": "testeTN",
+"environmentName": "master",
+"processId": "01234,
+"versionId": "10-02-2024",
+"type": "testeType",
+"caseId": 123,
+"groupId": "admin",
+"userId": 3,
+"taskName": "t1",
 "isStartProcess": false
 }
 </camunda:inputParameter>
