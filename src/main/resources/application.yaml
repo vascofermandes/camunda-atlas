@@ -1,6 +1,27 @@
-spring.kafka.bootstrap-servers: localhost:9092
-#spring.kafka.bootstrap-servers: atlas-eu-event.linkconsulting.com:9092
-spring.kafka.consumer.group-id: kafka_test_consumer
+spring.kafka.bootstrap-servers: ${kafka.host}
+spring.kafka.consumer.group-id: ${kafka.group-id}
+# Don't fail startup if a topic is not present yet
+spring.kafka.listener.missing-topics-fatal: false
+# Don't auto-start listeners until connectivity is verified
+spring.kafka.listener.auto-startup: false
+# SASL/PLAIN authentication
+spring.kafka.properties.security.protocol: ${kafka.auth}
+spring.kafka.properties.sasl.mechanism: PLAIN
+spring.kafka.properties.sasl.jaas.config: >-
+  org.apache.kafka.common.security.plain.PlainLoginModule required
+  username="${kafka.username}" password="${kafka.password}";
+
+# Kafka custom properties
+kafka:
+  host: atlas-eu.linkconsulting.com:9092
+  group-id: PLACEHOLDER
+  handover-topic: atlas.handover
+  auth: SASL_PLAINTEXT
+  username: david.pereira
+  password: david.pereira2025
+  # optional: separate topic for process monitor consumer (defaults to previous testTopic)
+  monitor-topic: testTopic
+
 spring.datasource.url: jdbc:h2:file:./camunda-h2-database
 
 camunda.bpm.admin-user:
@@ -11,5 +32,3 @@ camunda:
       generic-properties:
         properties:
           historyTimeToLive: 5
-
-

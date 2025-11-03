@@ -5,6 +5,7 @@ import com.vasco.model.HandoverMessage;
 import com.vasco.service.imp.HandoverServiceImp;
 import com.vasco.util.HandoverMessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,8 @@ public class HandoverController {
     @Autowired
     private HandoverServiceImp handoverService;
 
+    @Value("${kafka.handover-topic}")
+    private String handoverTopic;
 
     @PostMapping(value = "/{processKey}/startProcess")
     public ResponseEntity<String> startProcessHandover(@PathVariable("processKey") String processKey,
@@ -42,7 +45,7 @@ public class HandoverController {
         System.out.println(" CONTROLLER NOTIFY END PROCESS : " + processKey );
 
         if(HandoverMessageValidator.isValidMessage(handoverMessage)){
-            handoverService.notifyEndProcess("handoverTopic", processKey, handoverMessage);
+            handoverService.notifyEndProcess(handoverTopic, processKey, handoverMessage);
             return ResponseEntity.ok("Process end " + processKey + " notification sent to kafka");
         }
         else {
@@ -57,7 +60,7 @@ public class HandoverController {
         System.out.println(" CONTROLLER NOTIFY END PROCESS : " + "Process_1dv384a" );
 
         if(HandoverMessageValidator.isValidMessage(handoverMessage)){
-            handoverService.notifyEndProcess("handoverTopic", "Process_1dv384a", handoverMessage);
+            handoverService.notifyEndProcess(handoverTopic, "Process_1dv384a", handoverMessage);
             return ResponseEntity.ok("Process end " + "Process_1dv384a" + " notification sent to kafka");
         }
         else {

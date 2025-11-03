@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class MessageConsumer {
     private final Logger logger = Logger.getLogger(MessageConsumer.class.getName());
 
-    @KafkaListener(topics = "testTopic", groupId = "kafka_test_consumer")
+    @KafkaListener(topics = "${kafka.monitor-topic}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
     public void listen(ProcessMonitorMessage message) {
 
 
@@ -36,7 +36,7 @@ public class MessageConsumer {
 
     }
 
-    @KafkaListener(topics = "handoverTopic", groupId = "kafka_test_consumer")
+    @KafkaListener(topics = "${kafka.handover-topic}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerHandoverFactory")
     public void listen(HandoverMessage message) {
 
 

@@ -5,6 +5,7 @@ import com.vasco.model.ProcessMonitorMessage;
 import com.vasco.service.imp.ProcessMonitorServiceImp;
 import com.vasco.util.ProcessMonitorMessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +17,8 @@ public class MonitorController {
     @Autowired
     private ProcessMonitorServiceImp processMonitorService;
 
+    @Value("${kafka.monitor-topic}")
+    private String testTopic;
 
     @PostMapping(value = "/{topic}/sendMessage")
     public String sendprocessMonitorMessage(@PathVariable("topic") String topic,
@@ -63,7 +66,7 @@ public class MonitorController {
 
 
         if(ProcessMonitorMessageValidator.isValidMessage(processMonitorMessage)){
-            processMonitorService.send("testTopic", processMonitorMessage);
+            processMonitorService.send(testTopic, processMonitorMessage);
             return;
         }
         throw(new MalformedObjectException("Malformed processMonitorMessage"));
